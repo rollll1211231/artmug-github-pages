@@ -16,6 +16,12 @@ content="width=device-width, initial-scale=1.0">
 
 <style>
 
+/* Custom hamster cursor (desktop pointer devices only). */
+@media (pointer:fine){
+    html,body,*{cursor:url("img/hamster-cursor.png") 8 8,auto!important}
+    a,button,label,select,summary,[role="button"],[tabindex]:not([tabindex="-1"]){cursor:url("img/hamster-cursor.png") 8 8,pointer!important}
+}
+
 @font-face{
     font-family:"Cafe24 Ssurround";
     src:url("fonts/Cafe24Ssurround.woff2") format("woff2");
