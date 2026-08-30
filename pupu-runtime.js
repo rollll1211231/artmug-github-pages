@@ -471,7 +471,7 @@ document.addEventListener("click", event => {
         }
         particle.style.left = `${event.clientX}px`;
         particle.style.top = `${event.clientY}px`;
-        if (icon === "hamster") particle.style.width = `${44 + Math.random() * 14}px`;
+        if (icon === "hamster") particle.style.width = `${56 + Math.random() * 18}px`;
         else particle.style.fontSize = `${20 + Math.random() * 8}px`;
         particle.style.setProperty("--hx", `${Math.cos(angle) * distance}px`);
         particle.style.setProperty("--hy", `${Math.sin(angle) * distance - 26}px`);

@@ -925,8 +925,8 @@ box-shadow:
 @keyframes portfolioOpen{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:680px){.portfolio-category-grid{grid-template-columns:1fr}.portfolio-category{padding:18px}.portfolio-lock,.portfolio-empty{padding:38px 18px}}
 
-.hamster-particle{position:fixed;left:0;top:0;z-index:10050;pointer-events:none;font-family:"Segoe UI Emoji","Apple Color Emoji",sans-serif;filter:drop-shadow(0 5px 8px rgba(45,75,105,.38));animation:hamsterParty 1.75s cubic-bezier(.18,.62,.28,1) forwards}
-.hamster-particle.is-hamster{width:48px;height:48px;object-fit:contain}
+.hamster-particle{position:fixed;left:0;top:0;z-index:10050;pointer-events:none;font-family:"Segoe UI Emoji","Apple Color Emoji",sans-serif;filter:drop-shadow(0 5px 8px rgba(45,75,105,.38));animation:hamsterParty 1.45s cubic-bezier(.18,.62,.28,1) forwards}
+.hamster-particle.is-hamster{width:60px;height:60px;object-fit:contain}
 @keyframes hamsterParty{0%{opacity:0;transform:translate(-50%,-50%) scale(.42) rotate(0)}10%{opacity:.95}25%,58%{opacity:1}78%{opacity:.62}100%{opacity:0;transform:translate(calc(-50% + var(--hx)),calc(-50% + var(--hy))) scale(1.12) rotate(var(--hr))}}
 
 .timeline{max-width:1120px;margin:55px auto 0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;position:relative}
@@ -3528,7 +3528,7 @@ document.addEventListener("click", event => {
         }
         particle.style.left = `${event.clientX}px`;
         particle.style.top = `${event.clientY}px`;
-        if (icon === "hamster") particle.style.width = `${44 + Math.random() * 14}px`;
+        if (icon === "hamster") particle.style.width = `${56 + Math.random() * 18}px`;
         else particle.style.fontSize = `${20 + Math.random() * 8}px`;
         particle.style.setProperty("--hx", `${Math.cos(angle) * distance}px`);
         particle.style.setProperty("--hy", `${Math.sin(angle) * distance - 26}px`);
