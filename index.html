@@ -16,10 +16,10 @@ content="width=device-width, initial-scale=1.0">
 
 <style>
 
-/* Custom hamster cursor (desktop pointer devices only). */
+/* Custom Momonga cursors (desktop pointer devices only). */
 @media (pointer:fine){
-    html,body,*{cursor:url("img/hamster-cursor.png") 8 8,auto!important}
-    a,button,label,select,summary,[role="button"],[tabindex]:not([tabindex="-1"]){cursor:url("img/hamster-cursor.png") 8 8,pointer!important}
+    html,body,*{cursor:url("img/momonga-default.cur"),auto!important}
+    html.pupu-background-working,html.pupu-background-working body,html.pupu-background-working body *{cursor:url("img/momonga-background.cur"),progress!important}
 }
 
 @font-face{
@@ -2136,6 +2136,11 @@ scale(1.5);
 }
 
 </style>
+
+<script>
+document.documentElement.classList.add("pupu-background-working");
+window.addEventListener("load",()=>document.documentElement.classList.remove("pupu-background-working"),{once:true});
+</script>
 
 
 
