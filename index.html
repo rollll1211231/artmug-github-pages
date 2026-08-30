@@ -2135,6 +2135,52 @@ scale(1.5);
     #avatar .avatar-showcase-heading h2{font-size:17px}
 }
 
+/* Reference-style portfolio viewer. Scoped to #portfolio only. */
+#portfolio .portfolio-guide{display:flex;align-items:center;justify-content:center;gap:12px;margin:-10px auto 24px;color:#728199;font-size:13px}
+#portfolio .portfolio-guide strong{color:#2c3d58}
+#portfolio .portfolio-guide::after{content:"↓";color:#69aee0;font-size:18px}
+#portfolio .portfolio-category-grid{max-width:930px;margin:0 auto 42px;display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
+#portfolio .portfolio-category{padding:13px 22px;border:1px solid rgba(127,165,196,.38);border-radius:999px;background:rgba(255,255,255,.76);box-shadow:0 9px 22px rgba(60,106,145,.1);color:#526078;font:inherit;font-size:13px;font-weight:700;text-align:center;cursor:pointer;transition:.25s}
+#portfolio .portfolio-category::after{content:none}
+#portfolio .portfolio-category strong{display:inline;margin:0;color:inherit;font-size:inherit}
+#portfolio .portfolio-category span{display:none}
+#portfolio .portfolio-category:hover{transform:translateY(-2px);border-color:#83bfe8}
+#portfolio .portfolio-category.active{transform:translateY(-2px);border-color:#33455d;background:#33455d;color:#fff;box-shadow:0 12px 26px rgba(35,58,82,.24)}
+#portfolio .portfolio-category.active::before{content:"✓ ";font-weight:900}
+#portfolio .portfolio-lock{display:none}
+#portfolio .portfolio-empty{max-width:930px;margin:auto;padding:58px 24px;border:1px dashed #abd3f0;border-radius:20px;background:rgba(255,255,255,.62);text-align:center;color:#697992}
+#portfolio .portfolio-gallery{max-width:1000px;margin:auto;padding:34px 30px 28px;border:1px solid rgba(145,177,202,.34);background:rgba(255,255,255,.72);box-shadow:0 22px 60px rgba(61,101,137,.12);animation:portfolioOpen .35s ease both}
+#portfolio .portfolio-gallery-head{max-width:none;margin:0 0 28px;display:block;text-align:center}
+#portfolio .portfolio-gallery-head::before{content:"PORTFOLIO";display:block;margin-bottom:10px;color:#70a9d2;font-size:12px;font-style:italic;letter-spacing:.18em}
+#portfolio .portfolio-gallery-head strong{display:block;color:#24334b;font-size:24px}
+#portfolio .portfolio-gallery-head strong::after{content:"좌우 버튼이나 화면을 넘겨 작업 샘플을 확인해 주세요.";display:block;margin-top:10px;color:#768398;font-size:12px;font-weight:400}
+#portfolio .portfolio-gallery-head button{display:none}
+#portfolio .portfolio-viewer{position:relative;display:grid;grid-template-columns:52px minmax(0,1fr) 52px;gap:18px;align-items:center;margin-top:0}
+#portfolio .portfolio-main{overflow:hidden;border:1px solid rgba(132,165,191,.38);border-radius:0;background:#edf5fb;box-shadow:none;aspect-ratio:16/10;cursor:pointer}
+#portfolio .portfolio-main img{width:100%;height:100%;object-fit:contain;background:#f4f8fb;transition:opacity .24s ease,transform .5s ease}
+#portfolio .portfolio-main:hover img{transform:scale(1.015)}
+#portfolio .slide-btn{display:block;width:48px;height:48px;border:1px solid #8ba8be;border-radius:13px;background:rgba(255,255,255,.9);color:#33465d;font-size:20px;cursor:pointer;transition:.25s}
+#portfolio .slide-btn:hover{transform:translateY(-3px);background:#fff;box-shadow:0 10px 20px rgba(57,93,124,.14)}
+#portfolio .portfolio-thumbnail{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:18px}
+#portfolio .portfolio-thumbnail .portfolio-thumbnail{margin-top:0}
+#portfolio .thumb{width:9px;height:9px;padding:0;border:0;border-radius:50%;background:#cad6df;cursor:pointer;transition:.25s}
+#portfolio .thumb:hover{transform:scale(1.25);background:#8ab7d7}
+#portfolio .thumb.active{background:#40576d;box-shadow:0 0 0 3px rgba(64,87,109,.12)}
+#portfolio .portfolio-counter{margin-top:11px;text-align:center;color:#8390a1;font-size:11px;letter-spacing:.12em}
+@media(max-width:680px){
+  #portfolio .portfolio-guide{flex-direction:column;gap:2px;text-align:center}
+  #portfolio .portfolio-category-grid{gap:8px;margin-bottom:26px}
+  #portfolio .portfolio-category{padding:10px 14px;font-size:11px}
+  #portfolio .portfolio-gallery{padding:24px 12px 20px}
+  #portfolio .portfolio-gallery-head strong{font-size:20px}
+  #portfolio .portfolio-viewer{grid-template-columns:1fr;gap:12px}
+  #portfolio .portfolio-viewer .slide-btn{display:block;position:absolute;z-index:2;width:42px;height:42px;background:rgba(255,255,255,.86)}
+  #portfolio .portfolio-viewer .slide-btn.prev{left:8px}
+  #portfolio .portfolio-viewer .slide-btn.next{right:8px}
+  #portfolio .portfolio-main{aspect-ratio:4/3}
+  #portfolio .portfolio-empty{padding:38px 18px}
+}
+
 </style>
 
 <script>
@@ -2714,9 +2760,11 @@ OPTION
 
         <h2>포트폴리오</h2>
 
-        <p>보고 싶은 카테고리를 먼저 선택하면 해당 작업 샘플이 열립니다.</p>
+        <p>카테고리를 선택하고 큰 화면으로 작업 샘플을 확인해 주세요.</p>
 
     </div>
+
+    <div class="portfolio-guide"><strong>보고 싶은 작업 종류를 선택해 주세요</strong><span>선택한 카테고리의 샘플이 아래에 표시됩니다.</span></div>
 
     <div class="portfolio-category-grid" role="group" aria-label="포트폴리오 카테고리 선택">
         <button type="button" class="portfolio-category" data-portfolio-folder="sculpt" data-portfolio-label="원화 기반 성형"><strong>원화 기반 성형</strong><span>ILLUST SCULPT</span></button>
@@ -2760,6 +2808,7 @@ class="portfolio-thumbnail"
 id="portfolioThumbs">
 </div>
     </div>
+    <div class="portfolio-counter" id="portfolioCounter" aria-live="polite"></div>
     <div class="portfolio-empty" id="portfolioEmpty" hidden><strong>샘플을 준비 중입니다</strong><span>이 카테고리에 이미지가 등록되면 자동으로 표시됩니다.</span></div>
     </div>
 
@@ -3256,6 +3305,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const portfolioEmpty = document.getElementById("portfolioEmpty");
     const portfolioTitle = document.getElementById("portfolioCategoryTitle");
     const portfolioClose = document.getElementById("portfolioClose");
+    const portfolioCounter = document.getElementById("portfolioCounter");
 
     let currentIndex = 0;
     let portfolioImages = [];
@@ -3268,17 +3318,17 @@ document.addEventListener("DOMContentLoaded", () => {
         thumbs[currentIndex]?.classList.add("active");
         mainImage.src = portfolioImages[currentIndex].src;
         mainImage.alt = `${portfolioTitle.textContent} 샘플 ${currentIndex + 1}`;
+        if (portfolioCounter) portfolioCounter.textContent = `${currentIndex + 1} / ${portfolioImages.length}`;
     }
 
     function rebuildPortfolioThumbs() {
         portfolioImages.sort((a, b) => a.number - b.number);
         thumbsBox.replaceChildren();
         portfolioImages.forEach((item, index) => {
-            const thumb = new Image();
-            thumb.src = item.src;
+            const thumb = document.createElement("button");
+            thumb.type = "button";
             thumb.className = "thumb";
-            thumb.loading = "lazy";
-            thumb.alt = `${portfolioTitle.textContent} 작은 이미지 ${index + 1}`;
+            thumb.setAttribute("aria-label", `${portfolioTitle.textContent} 샘플 ${index + 1} 보기`);
             thumb.addEventListener("click", () => showImage(index));
             thumbsBox.appendChild(thumb);
         });
@@ -3296,6 +3346,7 @@ document.addEventListener("DOMContentLoaded", () => {
         portfolioViewer.hidden = true;
         mainImage.hidden = true;
         thumbsBox.replaceChildren();
+        if (portfolioCounter) portfolioCounter.textContent = "";
         portfolioImages = [];
         currentIndex = 0;
         let finished = 0;
@@ -3303,23 +3354,30 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let index = 1; index <= 20; index++) {
             const number = String(index).padStart(2, "0");
             const probe = new Image();
+            const finishProbe = () => {
+                finished++;
+                if (finished !== 20) return;
+                if (portfolioImages.length > 0) {
+                    portfolioViewer.hidden = false;
+                    mainImage.hidden = false;
+                    portfolioEmpty.hidden = true;
+                    rebuildPortfolioThumbs();
+                } else {
+                    portfolioEmpty.hidden = false;
+                }
+            };
             probe.onload = () => {
                 portfolioImages.push({ number: index, src: probe.src });
-                portfolioViewer.hidden = false;
-                mainImage.hidden = false;
-                portfolioEmpty.hidden = true;
-                rebuildPortfolioThumbs();
-                finished++;
+                finishProbe();
             };
-            probe.onerror = () => {
-                finished++;
-                if (finished === 20 && portfolioImages.length === 0) portfolioEmpty.hidden = false;
-            };
+            probe.onerror = finishProbe;
             probe.src = `portfolio/${folder}/${number}.webp`;
         }
     }
 
     document.querySelectorAll(".portfolio-category").forEach(button => button.addEventListener("click", () => openPortfolioCategory(button)));
+    const firstPortfolioCategory = document.querySelector(".portfolio-category");
+    if (firstPortfolioCategory) openPortfolioCategory(firstPortfolioCategory);
     portfolioClose?.addEventListener("click", () => {
         portfolioGallery.hidden = true;
         portfolioLock.hidden = false;

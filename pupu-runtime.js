@@ -199,6 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const portfolioEmpty = document.getElementById("portfolioEmpty");
     const portfolioTitle = document.getElementById("portfolioCategoryTitle");
     const portfolioClose = document.getElementById("portfolioClose");
+    const portfolioCounter = document.getElementById("portfolioCounter");
 
     let currentIndex = 0;
     let portfolioImages = [];
@@ -211,17 +212,17 @@ document.addEventListener("DOMContentLoaded", () => {
         thumbs[currentIndex]?.classList.add("active");
         mainImage.src = portfolioImages[currentIndex].src;
         mainImage.alt = `${portfolioTitle.textContent} 샘플 ${currentIndex + 1}`;
+        if (portfolioCounter) portfolioCounter.textContent = `${currentIndex + 1} / ${portfolioImages.length}`;
     }
 
     function rebuildPortfolioThumbs() {
         portfolioImages.sort((a, b) => a.number - b.number);
         thumbsBox.replaceChildren();
         portfolioImages.forEach((item, index) => {
-            const thumb = new Image();
-            thumb.src = item.src;
+            const thumb = document.createElement("button");
+            thumb.type = "button";
             thumb.className = "thumb";
-            thumb.loading = "lazy";
-            thumb.alt = `${portfolioTitle.textContent} 작은 이미지 ${index + 1}`;
+            thumb.setAttribute("aria-label", `${portfolioTitle.textContent} 샘플 ${index + 1} 보기`);
             thumb.addEventListener("click", () => showImage(index));
             thumbsBox.appendChild(thumb);
         });
@@ -239,6 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
         portfolioViewer.hidden = true;
         mainImage.hidden = true;
         thumbsBox.replaceChildren();
+        if (portfolioCounter) portfolioCounter.textContent = "";
         portfolioImages = [];
         currentIndex = 0;
         let finished = 0;
@@ -246,23 +248,30 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let index = 1; index <= 20; index++) {
             const number = String(index).padStart(2, "0");
             const probe = new Image();
+            const finishProbe = () => {
+                finished++;
+                if (finished !== 20) return;
+                if (portfolioImages.length > 0) {
+                    portfolioViewer.hidden = false;
+                    mainImage.hidden = false;
+                    portfolioEmpty.hidden = true;
+                    rebuildPortfolioThumbs();
+                } else {
+                    portfolioEmpty.hidden = false;
+                }
+            };
             probe.onload = () => {
                 portfolioImages.push({ number: index, src: probe.src });
-                portfolioViewer.hidden = false;
-                mainImage.hidden = false;
-                portfolioEmpty.hidden = true;
-                rebuildPortfolioThumbs();
-                finished++;
+                finishProbe();
             };
-            probe.onerror = () => {
-                finished++;
-                if (finished === 20 && portfolioImages.length === 0) portfolioEmpty.hidden = false;
-            };
+            probe.onerror = finishProbe;
             probe.src = `portfolio/${folder}/${number}.webp`;
         }
     }
 
     document.querySelectorAll(".portfolio-category").forEach(button => button.addEventListener("click", () => openPortfolioCategory(button)));
+    const firstPortfolioCategory = document.querySelector(".portfolio-category");
+    if (firstPortfolioCategory) openPortfolioCategory(firstPortfolioCategory);
     portfolioClose?.addEventListener("click", () => {
         portfolioGallery.hidden = true;
         portfolioLock.hidden = false;
