@@ -29,7 +29,7 @@
 
 ```html
 <div id="pupuCommissionMount" style="display:block;width:100%;margin:0;padding:0"></div>
-<script src="https://rollll1211231.github.io/artmug-github-pages/artmug-loader.js?v=20260830-4"></script>
+<script src="https://rollll1211231.github.io/artmug-github-pages/artmug-loader.js?v=20260830-5"></script>
 ```
 
 `artmug-loader.js`가 아트머그 내부에 격리된 상세페이지를 만들고 `pupu-runtime.js`가 페이지 전환과 FAQ 등 상호작용을 실행합니다.
