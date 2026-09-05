@@ -3,7 +3,7 @@
 ## 폴더 구조
 
 - `index.html`: 배포할 상세 페이지
-- `img/banner.webp`: 상단 배너 이미지
+- `img/banner-main.png`: 상단 배너 이미지
 - `avatar/manuka.webp`: 마누카 아바타 이미지
 - `avatar/kaguya.webp`: 카구야 아바타 이미지
 - `portfolio/bboing/01.webp` ~ `20.webp`: 뽀잉눈 샘플
@@ -29,7 +29,7 @@
 
 ```html
 <div id="pupuCommissionMount" style="display:block;width:100%;margin:0;padding:0"></div>
-<script src="https://rollll1211231.github.io/artmug-github-pages/artmug-loader.js?v=20260831-1"></script>
+<script src="https://rollll1211231.github.io/artmug-github-pages/artmug-loader.js?v=20260905-1"></script>
 ```
 
 `artmug-loader.js`가 아트머그 내부에 격리된 상세페이지를 만들고 `pupu-runtime.js`가 페이지 전환과 FAQ 등 상호작용을 실행합니다.

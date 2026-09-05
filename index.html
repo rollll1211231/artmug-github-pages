@@ -2167,6 +2167,12 @@ scale(1.5);
 #portfolio .thumb:hover{transform:scale(1.25);background:#8ab7d7}
 #portfolio .thumb.active{background:#40576d;box-shadow:0 0 0 3px rgba(64,87,109,.12)}
 #portfolio .portfolio-counter{margin-top:11px;text-align:center;color:#8390a1;font-size:11px;letter-spacing:.12em}
+
+/* Main banner: borderless, transparent, and motionless on hover. */
+.hero .banner-card{background:transparent;border:0;border-radius:0;box-shadow:none;backdrop-filter:none;overflow:visible;transition:none}
+.hero .banner-card:hover{box-shadow:none;transform:none}
+.hero .banner-card img{transition:none}
+.hero .banner-card:hover img{transform:none}
 @media(max-width:680px){
   #portfolio .portfolio-guide{flex-direction:column;gap:2px;text-align:center}
   #portfolio .portfolio-category-grid{gap:8px;margin-bottom:26px}
@@ -2305,7 +2311,7 @@ OPEN EVENT
 
 <img
 
-src="img/banner.webp"
+src="img/banner-main.png"
 
 alt="대표 배너">
 
